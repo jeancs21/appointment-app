@@ -8,9 +8,9 @@ const formValidation = (errors: FieldErrors<FieldValues>, errorKey: string) => {
 const CustomInput = ({ name = '', label = '', type = '', disabled = false, required = false }) => {
     const {register, formState: {errors} } = useFormContext();
   return (
-    <div className="flex flex-col gap-2">
-        <label>{label}</label>
-        <input
+    <div className="flex flex-col gap-2 w-full">
+        <label className="font-medium text-pink-400">{label}</label>
+        <input className="border-solid border-2 p-2 rounded-full"
             required={required}
             disabled={disabled}
             type={type}
@@ -18,7 +18,7 @@ const CustomInput = ({ name = '', label = '', type = '', disabled = false, requi
             {...register(name)}
         />
         {errors && (
-          <p color="red">
+          <p className="text-red-500 text-center">
             {(formValidation(errors, name) as ReactNode)}
           </p>
         )}

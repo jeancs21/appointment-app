@@ -5,6 +5,7 @@ import { TrashIcon } from '@heroicons/react/24/solid';
 import PatientDetails from '../Dialog/PatientDetails';
 import NavigateButton from '../../../containers/NavigateButton';
 import { PublicRoutes } from '../../../model/routes';
+import { Link } from 'react-router-dom';
 
 type Props = {
   patients: PatientFormValues[];
@@ -49,7 +50,9 @@ const PatientTable:FunctionComponent<Props> = (props) => {
               <td className='border-2 px-4'>
                 <div className='flex gap-8'>
                   <EyeIcon className='w-8 h-8 m-0 fill-pink-400 cursor-pointer hover:fill-pink-600 duration-300' onClick={() => handleClick(patient)} />
-                  <PencilSquareIcon className='w-8 h-8 m-0 fill-pink-400 cursor-pointer hover:fill-pink-600 duration-300'/>
+                  <Link to={`/edit-patient/${patient.id}`}>
+                    <PencilSquareIcon className='w-8 h-8 m-0 fill-pink-400 cursor-pointer hover:fill-pink-600 duration-300'/>
+                  </Link>
                   <TrashIcon className='w-8 h-8 m-0 fill-pink-400 cursor-pointer hover:fill-pink-600 duration-300' />
                 </div>
               </td>

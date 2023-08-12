@@ -3,6 +3,8 @@ import { PatientEmptyState, PatientFormValues } from '../../../model/patient.mod
 import { EyeIcon, PencilSquareIcon } from '@heroicons/react/20/solid';
 import { TrashIcon } from '@heroicons/react/24/solid';
 import PatientDetails from '../Dialog/PatientDetails';
+import NavigateButton from '../../../containers/NavigateButton';
+import { PublicRoutes } from '../../../model/routes';
 
 type Props = {
   patients: PatientFormValues[];
@@ -26,6 +28,9 @@ const PatientTable:FunctionComponent<Props> = (props) => {
 
   return (
     <>
+      <div className='flex w-full justify-end mb-6'>
+        <NavigateButton path={PublicRoutes.ADD_PATIENT} buttonText='Registrar paciente' />
+      </div>
       <table className='w-full border-4 border-pink-100 text-left'>
         <thead className='bg-pink-400'>
           <tr className='text-white'>

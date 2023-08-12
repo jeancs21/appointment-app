@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react'
 import { PatientEmptyState, PatientFormValues } from '../../../model/patient.model'
-import { PencilSquareIcon } from '@heroicons/react/20/solid';
+import { EyeIcon, PencilSquareIcon } from '@heroicons/react/20/solid';
 import { TrashIcon } from '@heroicons/react/24/solid';
 import PatientDetails from '../Dialog/PatientDetails';
 
@@ -37,12 +37,13 @@ const PatientTable:FunctionComponent<Props> = (props) => {
         </thead>
         <tbody>
           {props.patients.map((patient) => (
-            <tr key={patient.id} className='border-2 cursor-pointer hover:bg-slate-100 hover:font-medium' onClick={() => handleClick(patient)}>
+            <tr key={patient.id} className='border-2 cursor-pointer hover:bg-slate-100 hover:font-medium'>
               <td className=' py-4 px-4 border-2'>{patient.id}</td>
               <td className='border-2 px-4'>{patient.firstName}</td>
               <td className='border-2 px-4'>{patient.lastName}</td>
               <td className='border-2 px-4'>
                 <div className='flex gap-8'>
+                  <EyeIcon className='w-8 h-8 m-0 fill-pink-400 cursor-pointer hover:fill-pink-600 duration-300' onClick={() => handleClick(patient)} />
                   <PencilSquareIcon className='w-8 h-8 m-0 fill-pink-400 cursor-pointer hover:fill-pink-600 duration-300'/>
                   <TrashIcon className='w-8 h-8 m-0 fill-pink-400 cursor-pointer hover:fill-pink-600 duration-300' />
                 </div>

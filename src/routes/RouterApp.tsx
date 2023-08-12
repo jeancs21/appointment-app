@@ -4,10 +4,13 @@ import NotFound from '../pages/NotFound/NotFound';
 import { PublicRoutes } from '../model/routes';
 import PatientList from '../pages/PatientList/PatientList';
 import AddPatient from '../pages/AddPatient/AddPatient';
+import Menu from '../containers/Menu/Menu';
+import { menuItems } from '../model/menu';
 
 const RouterApp = () => {
   return (
     <>
+        <Menu items={menuItems} />
         <Routes>
             <Route path={"*"} element={<NotFound />} />
             <Route path={PublicRoutes.APPOINTMENTS} element={<AppointmentList />} />

@@ -7,11 +7,14 @@ import CustomInput from "../../../containers/CustomInput";
 import CustomButton from "../../../containers/CustomButton";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addPatient } from "../../../redux/states/patient.state";
 
 
 const AddPatientForm = () => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setError] = useState(false);
@@ -32,7 +35,7 @@ const AddPatientForm = () => {
     const submit = async (data: PatientFormValues) => {
         try {
             setIsLoading(true)
-            await console.log("datos insertados", data)
+            await dispatch(addPatient(data))
             reset()
             setIsLoading(false)
             setTimeout(() => {

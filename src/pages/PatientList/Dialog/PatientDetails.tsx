@@ -10,6 +10,9 @@ type Props = {
 }
 
 const PatientDetails:FunctionComponent<Props> = (props) => {
+
+    const emptyValue = '---';
+
   return (
     <>
         <Transition appear show={props.isOpen} as={Fragment}>
@@ -54,11 +57,11 @@ const PatientDetails:FunctionComponent<Props> = (props) => {
                             </div>
                             <div className=''>
                                 <label className='text-pink-400 font-medium'>Identificación</label>
-                                <p>{props.selectedPatient.identification}</p>
+                                <p>{props.selectedPatient.identification ? props.selectedPatient.identification : emptyValue}</p>
                             </div>
                             <div className=''>
                                 <label className='text-pink-400 font-medium'>Fecha de nacimiento</label>
-                                <p>{props.selectedPatient.birthday}</p>
+                                <p>{props.selectedPatient.birthday ? props.selectedPatient.birthday : emptyValue}</p>
                             </div>
                             <div className=''>
                                 <label className='text-pink-400 font-medium'>Síntomas</label>
@@ -66,11 +69,11 @@ const PatientDetails:FunctionComponent<Props> = (props) => {
                             </div>
                             <div className=''>
                                 <label className='text-pink-400 font-medium'>Tipo de sangre</label>
-                                <p>{props.selectedPatient.bloodType}</p>
+                                <p>{props.selectedPatient.bloodType ? props.selectedPatient.bloodType : emptyValue}</p>
                             </div>
                             <div className=''>
                                 <label className='text-pink-400 font-medium'>Teléfono</label>
-                                <p>{props.selectedPatient.phone}</p>
+                                <p>{props.selectedPatient.phone ? props.selectedPatient.phone : emptyValue}</p>
                             </div>
                             <div className=''>
                                 <label className='text-pink-400 font-medium'>Correo electrónico</label>

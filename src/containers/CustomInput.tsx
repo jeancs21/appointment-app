@@ -5,7 +5,7 @@ const formValidation = (errors: FieldErrors<FieldValues>, errorKey: string) => {
   return errors[errorKey] ? (errors[errorKey] as FieldErrors)?.message : ''
 }
 
-const CustomInput = ({ name = '', label = '', type = '', disabled = false, required = false }) => {
+const CustomInput = ({ name = '', label = '', type = '', defaultValues = '' ,disabled = false, required = false }) => {
     const {register, formState: {errors} } = useFormContext();
   return (
     <div className="flex flex-col gap-2 w-full">
@@ -16,6 +16,7 @@ const CustomInput = ({ name = '', label = '', type = '', disabled = false, requi
             type={type}
             id={name}
             {...register(name)}
+            defaultValue={defaultValues}
         />
         {errors && (
           <p className="text-red-500 text-center">

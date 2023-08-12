@@ -9,6 +9,7 @@ import NavigateButton from "../../../containers/NavigateButton";
 import CustomInput from "../../../containers/CustomInput";
 import CustomButton from "../../../containers/CustomButton";
 import { AppStore } from "../../../redux/store";
+import { updatePatient } from "../../../redux/states/patient.state";
 
 const EditPatientForm = () => {
 
@@ -41,8 +42,9 @@ const EditPatientForm = () => {
 
     const submit = async (data: PatientFormValues) => {
         try {
+            const updatedPatientData = {...data, id: patientValue.id}
             setIsLoading(true)
-            //await dispatch()
+            await dispatch(updatePatient(updatedPatientData))
             reset()
             setIsLoading(false)
             setTimeout(() => {

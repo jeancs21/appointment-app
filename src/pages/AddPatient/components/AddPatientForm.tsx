@@ -2,13 +2,14 @@ import { FormProvider, useForm } from "react-hook-form";
 import { PatientEmptyState, PatientFormValues } from "../../../model/patient.model";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { PatientFormSchema } from "../schemas/add-patient-form-schema";
-import NavigateButton from "../../../containers/NavigateButton";
-import CustomInput from "../../../containers/CustomInput";
-import CustomButton from "../../../containers/CustomButton";
+import NavigateButton from "../../../containers/Buttons/NavigateButton";
+import CustomInput from "../../../containers/InputForm/CustomInput";
+import CustomButton from "../../../containers/Buttons/CustomButton";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addPatient } from "../../../redux/states/patient.state";
+import { PublicRoutes } from "../../../model/routes";
 
 
 const AddPatientForm = () => {
@@ -39,7 +40,7 @@ const AddPatientForm = () => {
             reset()
             setIsLoading(false)
             setTimeout(() => {
-                navigate("/patients")
+                navigate(PublicRoutes.PATIENTS)
             }, 500)
 
         }
@@ -55,39 +56,39 @@ const AddPatientForm = () => {
         <FormProvider {...methods}>
             <div className="flex flex-col my-12">
                 <div className="mb-8 ml-4">
-                <NavigateButton path="/patients" buttonText="< Volver al listado" />
+                    <NavigateButton path={PublicRoutes.PATIENTS} buttonText="< Volver al listado" />
                 </div>
 
                 <div className="ml-8 text-3xl font-medium text-pink-400">Registrar paciente</div>
 
                 <div className="flex justify-center container self-center">
-                <form onSubmit={handleSubmit(submit)} className="flex flex-col gap-6 mt-20 sm:w-8/12 p-8 sm:p-4">
-                    <div className="flex flex-col sm:flex-row gap-8">
-                        <CustomInput type="text" name="firstName" label="Nombres *" required={true} />
-                        <CustomInput type="text" name="lastName" label="Apellidos *" required={true} />
-                    </div>
+                    <form onSubmit={handleSubmit(submit)} className="flex flex-col gap-6 mt-20 sm:w-8/12 p-8 sm:p-4">
+                        <div className="flex flex-col sm:flex-row gap-8">
+                            <CustomInput type="text" name="firstName" label="Nombres *" required={true} />
+                            <CustomInput type="text" name="lastName" label="Apellidos *" required={true} />
+                        </div>
 
-                    <div className="flex flex-col sm:flex-row gap-8">
-                        <CustomInput type="text" name="identification" label="Identificación" />
-                        <CustomInput type="date" name="birthday" label="Fecha de nacimiento" />
-                    </div>
+                        <div className="flex flex-col sm:flex-row gap-8">
+                            <CustomInput type="text" name="identification" label="Identificación" />
+                            <CustomInput type="date" name="birthday" label="Fecha de nacimiento" />
+                        </div>
 
-                    <div className="flex flex-col sm:flex-row gap-8">
-                        <CustomInput type="text" name="bloodType" label="Tipo de sangre" />
-                        <CustomInput type="text" name="phone" label="Teléfono" />
-                    </div>
+                        <div className="flex flex-col sm:flex-row gap-8">
+                            <CustomInput type="text" name="bloodType" label="Tipo de sangre" />
+                            <CustomInput type="text" name="phone" label="Teléfono" />
+                        </div>
 
-                    <div className="flex flex-col sm:flex-row gap-8">
-                        <CustomInput type="email" name="email" label="Correo electrónico *" required={true} />
-                    </div>
-                    <CustomInput type="textarea" name="symptoms" label="Síntomas *" required={true} />
-                    <CustomButton isDirty={isDirty} isValid={isValid} children={isLoading ? "Procesando..." : "Registrar"} />
-                    <div className="self-center text-center">
-                        {isError || isDirty && (
-                            <p className="text-red-500">Datos no validados</p>
-                        )}
-                    </div>
-                </form>
+                        <div className="flex flex-col sm:flex-row gap-8">
+                            <CustomInput type="email" name="email" label="Correo electrónico *" required={true} />
+                        </div>
+                        <CustomInput type="textarea" name="symptoms" label="Síntomas *" required={true} />
+                        <CustomButton isDirty={isDirty} isValid={isValid} children={isLoading ? "Procesando..." : "Registrar"} />
+                        <div className="self-center text-center">
+                            {isError || isDirty && (
+                                <p className="text-red-500">Datos no validados</p>
+                            )}
+                        </div>
+                    </form>
                 </div>
             </div>
         </FormProvider>

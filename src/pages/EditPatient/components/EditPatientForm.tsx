@@ -5,9 +5,9 @@ import { PatientFormValues } from "../../../model/patient.model";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { PatientFormSchema } from "../../AddPatient/schemas/add-patient-form-schema";
-import NavigateButton from "../../../containers/NavigateButton";
-import CustomInput from "../../../containers/CustomInput";
-import CustomButton from "../../../containers/CustomButton";
+import NavigateButton from "../../../containers/Buttons/NavigateButton";
+import CustomInput from "../../../containers/InputForm/CustomInput";
+import CustomButton from "../../../containers/Buttons/CustomButton";
 import { AppStore } from "../../../redux/store";
 import { updatePatient } from "../../../redux/states/patient.state";
 

@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react"
 import { AppointmentFormValues } from "../../../model/appointment.model"
 import { PublicRoutes } from "../../../model/routes";
-import NavigateButton from "../../../containers/NavigateButton";
+import NavigateButton from "../../../containers/Buttons/NavigateButton";
 import { Link } from "react-router-dom";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/20/solid";
 
@@ -23,7 +23,7 @@ const AppointmentContainer:FunctionComponent<Props> = (props) => {
                             key={appointment.id}
                             className="flex justify-evenly gap-24 bg-pink-400 p-4 m-4 rounded-md drop-shadow-xl hover:scale-105 duration-300 cursor-pointer items-center"
                         >
-                            <p className="text-white">{appointment.id}</p>
+                            <p className="text-white">{appointment.patient}</p>
                             <p className="text-white">{appointment.appointmentDate}</p>
                             <p className="text-white">{appointment.status}</p>
                             <div className='flex gap-8'>

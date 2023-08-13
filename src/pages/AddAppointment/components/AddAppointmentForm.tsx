@@ -2,13 +2,14 @@ import { FormProvider, useForm } from "react-hook-form"
 import { AppointmentEmptyState, AppointmentFormValues } from "../../../model/appointment.model"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { AppointmentFormSchema } from "../schemas/create-appointment-form-schema"
-import NavigateButton from "../../../containers/NavigateButton"
+import NavigateButton from "../../../containers/Buttons/NavigateButton"
 import { PublicRoutes } from "../../../model/routes"
-import CustomInput from "../../../containers/CustomInput"
-import CustomButton from "../../../containers/CustomButton"
+import CustomInput from "../../../containers/InputForm/CustomInput"
+import CustomButton from "../../../containers/Buttons/CustomButton"
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import { AppStore } from "../../../redux/store"
+import CustomSelect from "./InputForm/CustomSelect"
 
 const AddAppointmentForm = () => {
 
@@ -52,30 +53,7 @@ const AddAppointmentForm = () => {
             <form onSubmit={handleSubmit(submit)} className="flex flex-col gap-6 mt-20 sm:w-8/12 p-8 sm:p-4">
               <div className="flex flex-col sm:flex-row gap-8">
                 <CustomInput type="datetime-local" name="appointmentDate" label="Fecha *" required={true} />
-                <div className="flex flex-col gap-2 w-full">
-                  <label className="font-medium text-pink-400">Paciente *</label>
-                  <select
-                    className="border-solid border-2 p-2 rounded-full"
-                    required={true}
-                    id="patient"
-                    {...register("patient")}
-                  >
-                    {patientList.length === 0 ? (
-                      <option disabled selected value={""}>No hay pacientes registrados</option>
-                      ) : (
-                      <>
-                        <option disabled selected value={""}>
-                          Selecciona un paciente
-                        </option>
-                        {patientList.map((patient) => (
-                          <option key={patient.id} value={patient.id}>
-                            {`${patient.firstName} ${patient.lastName}`}
-                          </option>
-                        ))}
-                      </>
-                    )}
-                  </select>
-                </div>
+                <CustomSelect name="patient" label="Paciente *" required={true} items={patientList} />
               </div>
               <CustomButton isDirty={isDirty} isValid={isValid} children={"Agendar"} />
               <div className="self-center text-center">

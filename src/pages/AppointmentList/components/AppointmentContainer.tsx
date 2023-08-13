@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react"
 import { AppointmentFormValues } from "../../../model/appointment.model"
 import { PublicRoutes } from "../../../model/routes";
-import NavigateButton from "../../../containers/NavigateButton";
+import NavigateButton from "../../../containers/Buttons/NavigateButton";
 import { Link } from "react-router-dom";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/20/solid";
 

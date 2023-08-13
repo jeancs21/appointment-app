@@ -1,4 +1,4 @@
-import EmptyStateMessage from "../../../containers/EmptyStateMessage"
+import EmptyStateMessage from "../../../containers/Messages/EmptyStateMessage"
 import { PublicRoutes } from "../../../model/routes"
 
 const EmptyAppointmentList = () => {

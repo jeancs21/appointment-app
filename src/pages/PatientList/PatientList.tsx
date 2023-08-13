@@ -1,4 +1,3 @@
-import React from 'react'
 import EmptyPatientListMessage from './components/EmptyPatientListMessage'
 import { AppStore } from '../../redux/store'
 import { useSelector } from 'react-redux'

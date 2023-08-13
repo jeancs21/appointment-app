@@ -40,7 +40,7 @@ const AddPatientForm = () => {
             reset()
             setIsLoading(false)
             setTimeout(() => {
-                navigate("/patients")
+                navigate(PublicRoutes.PATIENTS)
             }, 500)
 
         }

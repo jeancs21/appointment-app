@@ -59,6 +59,7 @@ const AddAppointmentForm = () => {
     }
     catch (error) {
       console.log(error)
+      setError(true)
     }
   }
 
@@ -76,7 +77,7 @@ const AddAppointmentForm = () => {
             <form onSubmit={handleSubmit(submit)} className="flex flex-col gap-6 mt-20 sm:w-8/12 p-8 sm:p-4">
               <div className="flex flex-col sm:flex-row gap-8">
                 <CustomInput type="datetime-local" name="appointmentDate" label="Fecha *" required={true} />
-                <CustomSelect name="patient" label="Paciente *" required={true} patients={patientList} defaultValue={''}  />
+                <CustomSelect name="patient" label="Paciente *" required={true} patients={patientList} defaultValue={''} isEditing={false}  />
               </div>
               <CustomButton isDirty={isDirty} isValid={isValid} children={isLoading ? "Procesando..." : "Agendar"} />
               <div className="self-center text-center">

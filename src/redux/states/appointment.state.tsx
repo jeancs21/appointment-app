@@ -17,10 +17,17 @@ export const appointmentSlice = createSlice({
                 status: AppointmentStatusEnum.Activa
             };
             state.push(newAppointment)
+        },
+        updateAppointment: (state, action) => {
+            const updatedAppointment = action.payload;
+            const index = state.findIndex(appointment => appointment.id === updatedAppointment.id)
+            if (index !== -1) {
+                state[index] = updatedAppointment
+            }
         }
     }
 })
 
-export const { createAppointment } = appointmentSlice.actions;
+export const { createAppointment, updateAppointment } = appointmentSlice.actions;
 
 export default appointmentSlice.reducer

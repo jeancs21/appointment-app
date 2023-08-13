@@ -12,6 +12,7 @@ type Props = {
     defaultValue: string,
     required: boolean,
     patients: PatientFormValues[],
+    isEditing: boolean
 }
 
 const CustomSelect:FunctionComponent<Props> = (props) => {
@@ -30,8 +31,8 @@ const CustomSelect:FunctionComponent<Props> = (props) => {
                     <option disabled selected value={props.defaultValue}>No hay pacientes registrados</option>
                     ) : (
                     <>
-                        <option disabled selected value={props.defaultValue}>
-                            Selecciona un paciente
+                        <option disabled={!props.isEditing} selected value={props.defaultValue}>
+                            {`${props.isEditing ? props.defaultValue : "Selecciona un paciente"} `}
                         </option>
                         {props.patients.map((patient) => (
                             <option key={patient.id} value={patient.id}>

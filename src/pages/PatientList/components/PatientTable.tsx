@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import { PatientEmptyState, PatientFormValues } from '../../../model/patient.model'
 import { EyeIcon, PencilSquareIcon } from '@heroicons/react/20/solid';
 import { TrashIcon } from '@heroicons/react/24/solid';

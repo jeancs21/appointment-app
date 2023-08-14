@@ -27,7 +27,7 @@ const AppointmentContainer:FunctionComponent<Props> = (props) => {
                             <p className="text-white">{appointment.appointmentDate}</p>
                             <p className="text-white">{appointment.status}</p>
                             <div className='flex gap-8'>
-                                <Link to={`#`}>
+                                <Link to={`/edit-appointment/${appointment.id}`}>
                                     <PencilSquareIcon className='w-8 h-8 m-0 fill-white cursor-pointer hover:fill-slate-300 duration-300'/>
                                 </Link>
                                 <TrashIcon className='w-8 h-8 m-0 fill-white cursor-pointer hover:fill-slate-300 duration-300' />

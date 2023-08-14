@@ -54,41 +54,44 @@ const EditAppointmentForm = () => {
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid },
-    reset
   } = methods
 
   const submit = async (data: AppointmentFormValues) => {
     try {
-            setIsLoading(true)
-            if (isCancel) {
-                const cancelledAppointment = { ...appointmentValue, status: AppointmentStatusEnum.Cancelado };
-                await dispatch(updateAppointment(cancelledAppointment));
-                
-            }
+        setIsLoading(true);
 
-            const selectedPatient = patientList.find(patient => patient.id === data.patient)
-            if (selectedPatient) {
-                const newAppointmentData = {
-                    appointmentDate: data.appointmentDate,
-                    patient: `${selectedPatient.firstName} ${selectedPatient.lastName}`
+        let updatedAppointment = { ...appointmentValue };
+
+        if (isCancel) {
+            updatedAppointment.status = AppointmentStatusEnum.Cancelado;
+        } else {
+            if (data.patient) {
+                const selectedPatient = patientList.find(patient => patient.id === data.patient);
+                if (selectedPatient) {
+                    const newAppointmentData = {
+                        patient: `${selectedPatient.firstName} ${selectedPatient.lastName}`
+                    };
+                    updatedAppointment = { ...updatedAppointment, ...newAppointmentData };
                 }
-                const updatedAppointment = { ...appointmentValue , ...newAppointmentData}
-                console.log(updatedAppointment)
-                setIsLoading(true)
-                await dispatch(updateAppointment(updatedAppointment))
             }
 
-            reset()
-            setIsLoading(false)
-            setTimeout(() => {
-                navigate(PublicRoutes.APPOINTMENTS)
-            }, 500)
+            if (data.appointmentDate) {
+                updatedAppointment.appointmentDate = data.appointmentDate;
+            }
         }
-    catch (error) {
-      console.log(error)
-      setError(true)
+
+        await dispatch(updateAppointment(updatedAppointment));
+        setIsLoading(false);
+
+        setTimeout(() => {
+            navigate(PublicRoutes.APPOINTMENTS);
+        }, 500);
+    } catch (error) {
+        console.log(error);
+        setError(true);
     }
-  }
+};
+
 
   return (
     <>

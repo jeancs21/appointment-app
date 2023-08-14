@@ -4,6 +4,7 @@ import { patientSlice } from "./states/patient.state";
 import { AppointmentFormValues } from "../model/appointment.model";
 import { appointmentSlice } from "./states/appointment.state";
 import { loadDbPatientState } from "../services/persist-data/patients/persist-patient-info.services";
+import { loadDbAppointmenttState } from "../services/persist-data/appointments/persist-appointment-info";
 
 export interface AppStore {
     patient: PatientFormValues[];
@@ -11,7 +12,8 @@ export interface AppStore {
 }
 
 const initialState = {
-    patient: loadDbPatientState() || []
+    patient: loadDbPatientState() || [],
+    appointment: loadDbAppointmenttState() || []
 }
 
 export default configureStore<AppStore>({

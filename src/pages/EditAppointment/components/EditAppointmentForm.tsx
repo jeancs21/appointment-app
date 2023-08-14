@@ -107,7 +107,7 @@ const EditAppointmentForm = () => {
                 <CustomSelect name="patient" label="Paciente *" required={true} patients={patientList} defaultValue={appointmentValue.patient} isEditing={true} isCancelled={appointmentValue.status === AppointmentStatusEnum.Cancelado}  />
               </div>
               <CancelAppointment status={appointmentValue.status} handleModal={handleModal} isCancelled={appointmentValue.status === AppointmentStatusEnum.Cancelado} />
-              <CustomButton isDirty={isDirty} isValid={isValid} children={isLoading ? "Procesando..." : "Guardar cambios"} />
+              <CustomButton isDirty={isDirty} isValid={isValid} children={isLoading ? "Procesando..." : "Guardar cambios"} isCancelled={appointmentValue.status === AppointmentStatusEnum.Cancelado} />
               <ConfirmCancelModal isOpen={openModal} closeModal={setOpenModal} handleCancel={handleCancel} />
               <div className="self-center text-center">
                 {isError || isDirty && (

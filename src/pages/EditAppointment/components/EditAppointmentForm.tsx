@@ -55,8 +55,8 @@ const EditAppointmentForm = () => {
   const submit = async (data: AppointmentFormValues) => {
     try {
             setIsLoading(true)
-            const updatedAppointment = { ...appointmentValue, status: AppointmentStatusEnum.Cancelado };
-            await dispatch(updateAppointment(updatedAppointment));
+            const cancelledAppointment = { ...appointmentValue, status: AppointmentStatusEnum.Cancelado };
+            await dispatch(updateAppointment(cancelledAppointment));
             console.log(updateAppointment)
             reset()
             setIsLoading(false)

@@ -10,6 +10,9 @@ import CustomInput from "../../../containers/InputForm/CustomInput";
 import CustomSelect from "../../AddAppointment/components/InputForm/CustomSelect";
 import CustomButton from "../../../containers/Buttons/CustomButton";
 import { updateAppointment } from "../../../redux/states/appointment.state";
+import CancelAppointment from "./CancelAppointment";
+import { AppointmentStatusEnum } from "../../../model/enums/appointmentStatus.enum";
+import ConfirmCancelModal from "./ConfirmCancelModal";
 
 const EditAppointmentForm = () => {
 
@@ -30,6 +33,12 @@ const EditAppointmentForm = () => {
   const [isError, setError] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
+  const [openModal, setOpenModal] = useState(false)
+
+  const handleModal = () => {
+    setOpenModal(true)
+  }
+
   const methods = useForm<AppointmentFormValues>({
     defaultValues:  appointmentValue,
     mode: "onChange",
@@ -45,24 +54,16 @@ const EditAppointmentForm = () => {
 
   const submit = async (data: AppointmentFormValues) => {
     try {
-      setIsLoading(true)
-      const selectedPatient = patientList.find(patient => patient.id === data.patient)
-      if (selectedPatient) {
-        const newAppointmentData = {
-            appointmentDate: data.appointmentDate,
-            patient: `${selectedPatient.firstName} ${selectedPatient.lastName}`
+            setIsLoading(true)
+            const updatedAppointment = { ...appointmentValue, status: AppointmentStatusEnum.Cancelado };
+            await dispatch(updateAppointment(updatedAppointment));
+            console.log(updateAppointment)
+            reset()
+            setIsLoading(false)
+            setTimeout(() => {
+                navigate(PublicRoutes.APPOINTMENTS)
+            }, 500)
         }
-        const updatedAppointment = { ...appointmentValue , ...newAppointmentData}
-        console.log(updatedAppointment)
-        setIsLoading(true)
-        await dispatch(updateAppointment(updatedAppointment))
-      }
-      reset()
-      setIsLoading(false)
-      setTimeout(() => {
-        navigate(PublicRoutes.APPOINTMENTS)
-      }, 500)
-    }
     catch (error) {
       console.log(error)
       setError(true)
@@ -80,12 +81,14 @@ const EditAppointmentForm = () => {
           <div className="ml-8 text-3xl font-medium text-pink-400">Editar datos de la cita</div>
 
           <div className="flex justify-center container self-center">
-            <form onSubmit={handleSubmit(submit)} className="flex flex-col gap-6 mt-20 sm:w-8/12 p-8 sm:p-4">
+            <form onSubmit={handleSubmit(submit)} className="flex flex-col gap-6 mt-20 sm:w-8/12 p-8 sm:p-4" id="appointment-edit-form">
               <div className="flex flex-col sm:flex-row gap-8">
                 <CustomInput type="datetime-local" name="appointmentDate" label="Fecha *" required={true} defaultValues={appointmentValue.appointmentDate} />
                 <CustomSelect name="patient" label="Paciente *" required={true} patients={patientList} defaultValue={appointmentValue.patient} isEditing={true}  />
               </div>
-              <CustomButton isDirty={isDirty} isValid={isValid} children={isLoading ? "Procesando..." : "Guardar cambios"} />
+              <CancelAppointment status={appointmentValue.status} handleModal={handleModal} />
+              {/*<CustomButton isDirty={isDirty} isValid={isValid} children={isLoading ? "Procesando..." : "Guardar cambios"} />*/}
+              <ConfirmCancelModal isOpen={openModal} closeModal={setOpenModal} />
               <div className="self-center text-center">
                 {isError || isDirty && (
                   <p className="text-red-500">Datos no validados</p>

@@ -24,10 +24,14 @@ export const patientSlice = createSlice({
                 state[index] = updatedPatient;
                 persisteDbPatientState(state)
             };
+        },
+        deletePatient: (state, action) => {
+            const deletedPatient = action.payload;
+            return state.filter(patient => patient.id !== deletedPatient)
         }
     }
 })
 
-export const { addPatient, updatePatient } = patientSlice.actions;
+export const { addPatient, updatePatient, deletePatient } = patientSlice.actions;
 
 export default patientSlice.reducer;

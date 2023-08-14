@@ -1,16 +1,56 @@
-import { FunctionComponent } from "react"
-import { AppointmentFormValues } from "../../../model/appointment.model"
+import { FunctionComponent, useState } from "react"
+import { AppointmentEmptyState, AppointmentFormValues } from "../../../model/appointment.model"
 import { PublicRoutes } from "../../../model/routes";
 import NavigateButton from "../../../containers/Buttons/NavigateButton";
 import { Link } from "react-router-dom";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { AppointmentStatusEnum } from "../../../model/enums/appointmentStatus.enum";
+import ConfirmationModal from "../../../containers/Modals/ConfirmationModal";
+import { deleteAppointment } from "../../../redux/states/appointment.state";
+import { useDispatch } from "react-redux";
+import { deleteDbAppointmentState } from "../../../services/persist-data/appointments/persist-appointment-info";
 
 type Props = {
     appointments: AppointmentFormValues[];
 }
 
 const AppointmentContainer:FunctionComponent<Props> = (props) => {
+
+    const dispatch = useDispatch();
+
+    const [selectedAppointment, setSelectedAppointment] = useState<AppointmentFormValues>(AppointmentEmptyState);
+
+    const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
+
+    const handleConfirmationModal = (appointment: AppointmentFormValues) => {
+        setSelectedAppointment(appointment)
+        setConfirmationModalOpen(true)
+    }
+
+    const handleDelete = () => {
+        try {
+          if (selectedAppointment.id) {
+            console.log(selectedAppointment.id)
+
+            if (selectedAppointment.status === AppointmentStatusEnum.Cancelado) {
+                dispatch(deleteAppointment(selectedAppointment.id))
+                deleteDbAppointmentState(selectedAppointment.id)
+                setConfirmationModalOpen(false)
+                setTimeout(() => {
+                  alert("Cita eliminada")
+                }, 500)
+            }
+            else {
+                alert("Debes primero cancelar la cita!")
+                setConfirmationModalOpen(false)
+            }
+          }
+        }
+        catch (error) {
+          console.log('Error deleting appointment', error)
+        }
+    }
+
   return (
     <>
         <div className="flex container justify-end mb-6">
@@ -31,13 +71,28 @@ const AppointmentContainer:FunctionComponent<Props> = (props) => {
                                 <Link to={`/edit-appointment/${appointment.id}`}>
                                     <PencilSquareIcon className='w-8 h-8 m-0 fill-pink-500 cursor-pointer hover:fill-pink-300 duration-300'/>
                                 </Link>
-                                <TrashIcon className='w-8 h-8 m-0 fill-pink-500 cursor-pointer hover:fill-pink-300 duration-300' />
+                                <TrashIcon
+                                    className='w-8 h-8 m-0 fill-pink-500 cursor-pointer hover:fill-pink-300 duration-300'
+                                    onClick={() => handleConfirmationModal(appointment)}
+                                />
                             </div>
                         </div>
                     )
                 })
             }
         </div>
+        <ConfirmationModal
+            isOpen={isConfirmationModalOpen}
+            closeModal={setConfirmationModalOpen}
+            handleSubmitButton={handleDelete}
+            label="Está seguro de borrar esta cita?"
+            confirmButtonText="Sí, borrar"
+            confirmButtonStyle="bg-red-500 hover:bg-red-600 text-white"
+            cancelButtonText="No"
+            cancelButtonStyle="bg-slate-300 hover:bg-slate-400"
+            showDetails={true}
+            item={`Cita con: ${selectedAppointment.patient}`}
+        />
     </>
   )
 }

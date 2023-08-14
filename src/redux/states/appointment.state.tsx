@@ -27,10 +27,14 @@ export const appointmentSlice = createSlice({
                 state[index] = updatedAppointment;
                 persistDbAppointmentState(state)
             }
+        },
+        deleteAppointment: (state, action) => {
+            const deletedAppointment = action.payload;
+            return state.filter(appointment => appointment.id !== deletedAppointment)
         }
     }
 })
 
-export const { createAppointment, updateAppointment } = appointmentSlice.actions;
+export const { createAppointment, updateAppointment, deleteAppointment } = appointmentSlice.actions;
 
 export default appointmentSlice.reducer

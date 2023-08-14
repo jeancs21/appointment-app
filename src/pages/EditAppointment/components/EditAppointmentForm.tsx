@@ -12,7 +12,7 @@ import CustomButton from "../../../containers/Buttons/CustomButton";
 import { updateAppointment } from "../../../redux/states/appointment.state";
 import CancelAppointment from "./CancelAppointment";
 import { AppointmentStatusEnum } from "../../../model/enums/appointmentStatus.enum";
-import ConfirmCancelModal from "./ConfirmCancelModal";
+import ConfirmationModal from "../../../containers/Modals/ConfirmationModal";
 
 const EditAppointmentForm = () => {
 
@@ -111,7 +111,17 @@ const EditAppointmentForm = () => {
               </div>
               <CancelAppointment status={appointmentValue.status} handleModal={handleModal} isCancelled={appointmentValue.status === AppointmentStatusEnum.Cancelado} />
               <CustomButton isDirty={isDirty} isValid={isValid} children={isLoading ? "Procesando..." : "Guardar cambios"} isCancelled={appointmentValue.status === AppointmentStatusEnum.Cancelado} />
-              <ConfirmCancelModal isOpen={openModal} closeModal={setOpenModal} handleCancel={handleCancel} />
+              <ConfirmationModal
+                isOpen={openModal}
+                closeModal={setOpenModal}
+                handleSubmitButton={handleCancel}
+                form={"appointment-edit-form"}
+                label="Está seguro de cancelar esta cita?"
+                confirmButtonText="Sí, cancelar"
+                confirmButtonStyle="bg-red-500 hover:bg-red-600 text-white"
+                cancelButtonText="No"
+                cancelButtonStyle="bg-slate-300 hover:bg-slate-400"
+              />
               <div className="self-center text-center">
                 {isError || isDirty && (
                   <p className="text-red-500">Datos no validados</p>

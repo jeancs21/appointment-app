@@ -4,10 +4,18 @@ import { Fragment, FunctionComponent } from "react"
 type Props = {
     isOpen: boolean,
     closeModal: (value: boolean) => void,
-    handleCancel: () => void
+    handleSubmitButton: () => void,
+    label: string,
+    confirmButtonText: string,
+    confirmButtonStyle: string,
+    cancelButtonText: string,
+    cancelButtonStyle: string,
+    form?: string,
+    showDetails?: boolean,
+    item?: string,
 }
 
-const ConfirmCancelModal:FunctionComponent<Props> = (props) => {
+const ConfirmationModal:FunctionComponent<Props> = (props) => {
   return (
     <>
     <Transition appear show={props.isOpen} as={Fragment}>
@@ -40,23 +48,28 @@ const ConfirmCancelModal:FunctionComponent<Props> = (props) => {
                             as="h3"
                             className="text-xl sm:text-2xl font-semibold leading-6 text-gray-900 mb-8"
                         >
-                            ¿Está seguro de cancelar esta cita?
+                            {props.label}
                         </Dialog.Title>
+                        {props.showDetails && (
+                            <div className="flex justify-center mb-8">
+                                <p>{props.item}</p>
+                            </div>
+                        )}
                         <div className="flex justify-around">
                             <button
-                                className="flex items-center justify-center w-24 p-1 border text-center rounded-lg bg-red-500 hover:bg-red-600 text-white duration-300 cursor-pointer"
+                                className={`flex items-center justify-center w-24 p-1 border text-center rounded-lg duration-300 cursor-pointer ${props.confirmButtonStyle}`}
                                 type="submit"
-                                form="appointment-edit-form"
-                                onClick={() => props.handleCancel()}
+                                form={props.form}
+                                onClick={() => props.handleSubmitButton()}
                                 >
-                                    Sí, cancelar
+                                    {props.confirmButtonText}
                             </button>
                             <button
-                                className="flex items-center justify-center w-24 p-1 border text-center rounded-lg bg-slate-300 hover:bg-slate-400 duration-300 cursor-pointer"
+                                className={`flex items-center justify-center w-24 p-1 border text-center rounded-lg duration-300 cursor-pointer ${props.cancelButtonStyle}`}
                                 type="button"
                                 onClick={() => props.closeModal(false)}
                                 >
-                                    No
+                                    {props.cancelButtonText}
                             </button>
                         </div>
                     </Dialog.Panel>
@@ -69,4 +82,4 @@ const ConfirmCancelModal:FunctionComponent<Props> = (props) => {
   )
 }
 
-export default ConfirmCancelModal
+export default ConfirmationModal

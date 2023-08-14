@@ -26,3 +26,12 @@ export const loadDbAppointmenttState = (): AppointmentFormValues[] | undefined =
     }
     return undefined;
 }
+
+export const deleteDbAppointmentState = (appointmentId: string) => {
+    const prevAppointmentList = localStorage.getItem('appointmentList');
+    if (prevAppointmentList) {
+        const result = JSON.parse(prevAppointmentList) as AppointmentFormValues[];
+        const updatedAppointmentList = result.filter(appointment => appointment.id !== appointmentId);
+        persistDbAppointmentState(updatedAppointmentList);
+    }
+}

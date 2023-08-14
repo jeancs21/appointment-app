@@ -27,3 +27,12 @@ export const loadDbPatientState = (): PatientFormValues[] | undefined => {
     }
     return undefined;
 }
+
+export const deleteDbPatientState = (patientId: string) => {
+    const prevPatientList = localStorage.getItem('patientList');
+    if (prevPatientList) {
+        const result = JSON.parse(prevPatientList) as PatientFormValues[];
+        const updatedPatientList = result.filter(patient => patient.id !== patientId);
+        persisteDbPatientState(updatedPatientList);
+    }
+};

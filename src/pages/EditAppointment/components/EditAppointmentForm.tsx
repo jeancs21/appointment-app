@@ -114,7 +114,7 @@ const EditAppointmentForm = () => {
               <ConfirmationModal
                 isOpen={openModal}
                 closeModal={setOpenModal}
-                handleCancel={handleCancel}
+                handleSubmitButton={handleCancel}
                 form={"appointment-edit-form"}
                 label="Está seguro de cancelar esta cita?"
                 confirmButtonText="Sí, cancelar"

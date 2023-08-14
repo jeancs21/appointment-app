@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PatientEmptyState, PatientFormValues } from "../../model/patient.model";
-import pacientes from "../../mocks/patients";
+import { PatientFormValues } from "../../model/patient.model";
 import { v4 as uuidv4 } from 'uuid';
+import { managePatientState, persisteDbPatientState } from "../../services/persist-data/patients/persist-patient-info.services";
 
-export const PatientState: PatientFormValues[] = pacientes;
+export const PatientState: PatientFormValues[] = [];
 
 export const patientSlice = createSlice({
     name: 'patient',
@@ -15,13 +15,15 @@ export const patientSlice = createSlice({
                 id: uuidv4()
             };
             state.push(newPatient);
+            managePatientState(newPatient);
         },
         updatePatient: (state, action) => {
             const updatedPatient = action.payload;
             const index = state.findIndex(patient => patient.id === updatedPatient.id);
             if (index !== -1) {
-                state[index] = updatedPatient
-            }
+                state[index] = updatedPatient;
+                persisteDbPatientState(state)
+            };
         }
     }
 })

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import { AppointmentStatusEnum } from '../../../model/enums/appointmentStatus.enum'
 
 type Props = {
@@ -21,7 +21,7 @@ const CancelAppointment:FunctionComponent<Props> = (props) => {
                 onClick={() => props.handleModal()}
                 disabled={props.isCancelled}
             >
-                {props.isCancelled ? "Cancelada" : "Cancelar"}
+                {props.isCancelled ? "Cita Cancelada" : "Cancelar cita"}
             </button>
         </div>
     </>

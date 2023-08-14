@@ -3,6 +3,7 @@ import { AppointmentFormValues } from "../../model/appointment.model";
 import { v4 as uuidv4 } from 'uuid';
 import appointments from "../../mocks/appointments";
 import { AppointmentStatusEnum } from "../../model/enums/appointmentStatus.enum";
+import { manageAppointmentState, persistDbAppointmentState } from "../../services/persist-data/appointments/persist-appointment-info";
 
 export const AppointmentState: AppointmentFormValues[] = appointments;
 
@@ -17,12 +18,14 @@ export const appointmentSlice = createSlice({
                 status: AppointmentStatusEnum.Activa
             };
             state.push(newAppointment)
+            manageAppointmentState(newAppointment)
         },
         updateAppointment: (state, action) => {
             const updatedAppointment = action.payload;
             const index = state.findIndex(appointment => appointment.id === updatedAppointment.id)
             if (index !== -1) {
-                state[index] = updatedAppointment
+                state[index] = updatedAppointment;
+                persistDbAppointmentState(state)
             }
         }
     }

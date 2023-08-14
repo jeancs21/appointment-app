@@ -37,7 +37,6 @@ const EditPatientForm = () => {
         register,
         handleSubmit,
         formState: { errors, isDirty, isValid },
-        reset
     } = methods
 
     const submit = async (data: PatientFormValues) => {
@@ -45,7 +44,6 @@ const EditPatientForm = () => {
             const updatedPatientData = {...data, id: patientValue.id}
             setIsLoading(true)
             await dispatch(updatePatient(updatedPatientData))
-            reset()
             setIsLoading(false)
             setTimeout(() => {
                 navigate("/patients")

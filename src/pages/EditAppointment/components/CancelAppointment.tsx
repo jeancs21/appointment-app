@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import { AppointmentStatusEnum } from '../../../model/enums/appointmentStatus.enum'
 
 type Props = {

@@ -12,7 +12,8 @@ type Props = {
     defaultValue: string,
     required: boolean,
     patients: PatientFormValues[],
-    isEditing: boolean
+    isEditing: boolean,
+    isCancelled?: boolean
 }
 
 const CustomSelect:FunctionComponent<Props> = (props) => {
@@ -26,6 +27,7 @@ const CustomSelect:FunctionComponent<Props> = (props) => {
                 required={props.required}
                 id={props.name}
                 {...register(props.name)}
+                disabled={props.isCancelled}
             >
                 {props.patients.length === 0 ? (
                     <option disabled selected value={props.defaultValue}>No hay pacientes registrados</option>

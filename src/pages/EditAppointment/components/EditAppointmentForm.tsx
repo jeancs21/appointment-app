@@ -34,9 +34,14 @@ const EditAppointmentForm = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const [openModal, setOpenModal] = useState(false)
+  const [isCancel, setCancel] = useState(false)
 
   const handleModal = () => {
     setOpenModal(true)
+  }
+
+  const handleCancel = () => {
+    setCancel(true)
   }
 
   const methods = useForm<AppointmentFormValues>({
@@ -55,9 +60,24 @@ const EditAppointmentForm = () => {
   const submit = async (data: AppointmentFormValues) => {
     try {
             setIsLoading(true)
-            const cancelledAppointment = { ...appointmentValue, status: AppointmentStatusEnum.Cancelado };
-            await dispatch(updateAppointment(cancelledAppointment));
-            console.log(updateAppointment)
+            if (isCancel) {
+                const cancelledAppointment = { ...appointmentValue, status: AppointmentStatusEnum.Cancelado };
+                await dispatch(updateAppointment(cancelledAppointment));
+                
+            }
+
+            const selectedPatient = patientList.find(patient => patient.id === data.patient)
+            if (selectedPatient) {
+                const newAppointmentData = {
+                    appointmentDate: data.appointmentDate,
+                    patient: `${selectedPatient.firstName} ${selectedPatient.lastName}`
+                }
+                const updatedAppointment = { ...appointmentValue , ...newAppointmentData}
+                console.log(updatedAppointment)
+                setIsLoading(true)
+                await dispatch(updateAppointment(updatedAppointment))
+            }
+
             reset()
             setIsLoading(false)
             setTimeout(() => {
@@ -83,12 +103,12 @@ const EditAppointmentForm = () => {
           <div className="flex justify-center container self-center">
             <form onSubmit={handleSubmit(submit)} className="flex flex-col gap-6 mt-20 sm:w-8/12 p-8 sm:p-4" id="appointment-edit-form">
               <div className="flex flex-col sm:flex-row gap-8">
-                <CustomInput type="datetime-local" name="appointmentDate" label="Fecha *" required={true} defaultValues={appointmentValue.appointmentDate} />
-                <CustomSelect name="patient" label="Paciente *" required={true} patients={patientList} defaultValue={appointmentValue.patient} isEditing={true}  />
+                <CustomInput type="datetime-local" name="appointmentDate" label="Fecha *" required={true} defaultValues={appointmentValue.appointmentDate} disabled={appointmentValue.status === AppointmentStatusEnum.Cancelado} />
+                <CustomSelect name="patient" label="Paciente *" required={true} patients={patientList} defaultValue={appointmentValue.patient} isEditing={true} isCancelled={appointmentValue.status === AppointmentStatusEnum.Cancelado}  />
               </div>
-              <CancelAppointment status={appointmentValue.status} handleModal={handleModal} />
-              {/*<CustomButton isDirty={isDirty} isValid={isValid} children={isLoading ? "Procesando..." : "Guardar cambios"} />*/}
-              <ConfirmCancelModal isOpen={openModal} closeModal={setOpenModal} />
+              <CancelAppointment status={appointmentValue.status} handleModal={handleModal} isCancelled={appointmentValue.status === AppointmentStatusEnum.Cancelado} />
+              <CustomButton isDirty={isDirty} isValid={isValid} children={isLoading ? "Procesando..." : "Guardar cambios"} />
+              <ConfirmCancelModal isOpen={openModal} closeModal={setOpenModal} handleCancel={handleCancel} />
               <div className="self-center text-center">
                 {isError || isDirty && (
                   <p className="text-red-500">Datos no validados</p>

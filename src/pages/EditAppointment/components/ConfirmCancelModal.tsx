@@ -4,6 +4,7 @@ import { Fragment, FunctionComponent } from "react"
 type Props = {
     isOpen: boolean,
     closeModal: (value: boolean) => void,
+    handleCancel: () => void
 }
 
 const ConfirmCancelModal:FunctionComponent<Props> = (props) => {
@@ -46,6 +47,7 @@ const ConfirmCancelModal:FunctionComponent<Props> = (props) => {
                                 className="flex items-center justify-center w-24 p-1 border text-center rounded-lg bg-red-500 hover:bg-red-600 text-white duration-300 cursor-pointer"
                                 type="submit"
                                 form="appointment-edit-form"
+                                onClick={() => props.handleCancel()}
                                 >
                                     Sí, cancelar
                             </button>

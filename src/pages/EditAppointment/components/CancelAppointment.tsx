@@ -3,7 +3,8 @@ import { AppointmentStatusEnum } from '../../../model/enums/appointmentStatus.en
 
 type Props = {
     status: AppointmentStatusEnum,
-    handleModal: () => void
+    handleModal: () => void,
+    isCancelled?: boolean
 }
 
 const CancelAppointment:FunctionComponent<Props> = (props) => {
@@ -16,10 +17,11 @@ const CancelAppointment:FunctionComponent<Props> = (props) => {
             </div>
             <button
                 type='button'
-                className={`self-center flex items-center justify-center w-36 p-2 border text-center text-base rounded-full bg-red-500 text-white hover:bg-red-400  duration-300 cursor-pointer`}
+                className={`self-center flex items-center justify-center w-36 p-2 border text-center text-base rounded-full bg-red-500 text-white ${!props.isCancelled ? "hover:bg-red-400" : "opacity-30"}  duration-300 cursor-pointer`}
                 onClick={() => props.handleModal()}
+                disabled={props.isCancelled}
             >
-                Cancelar cita
+                {props.isCancelled ? "Cancelada" : "Cancelar"}
             </button>
         </div>
     </>

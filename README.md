@@ -24,15 +24,15 @@ Welcome to the Medical Appointment Application repository! This is a web applica
 
 Before you begin, ensure you have the following installed:
 
-- Node.js (version x.x.x)
-- npm (version x.x.x)
+- Node.js (version 14.17.1 or upper)
+- npm (version 6.14.13 or upper)
 
 ## Installation
 
 To get started, follow these steps:
 
 1. Clone this repository to your local machine.
-2. Navigate to the project directory: `cd medical-appointment-app`.
+2. Navigate to the project directory: `cd appointment-app`.
 3. Install the project dependencies:`npm install`.
 
 ## Usage

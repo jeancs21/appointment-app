@@ -48,10 +48,12 @@ This will start the development server. Open your browser and navigate to `http:
 ## Screenshots
 
 ### Listado de pacientes
-![Listado](https://github.com/jeancs21/appointment-app/assets/40588173/476921bc-13bb-4a23-a419-23492ecc17ae)
+![Listado](https://github.com/jeancs21/appointment-app/assets/40588173/6a0cffdc-f346-49b7-9709-fc598e08c47f)
+
 
 ### Listado de citas
-![listado-citas](https://github.com/jeancs21/appointment-app/assets/40588173/5cef3054-445f-4743-8853-8a728bdf34b0)
+![listado-citas](https://github.com/jeancs21/appointment-app/assets/40588173/ee3ae6e7-7288-4d10-8e2a-17ee71241785)
+
 
 
 ## Features
@@ -105,6 +107,7 @@ This will start the development server. Open your browser and navigate to `http:
 
 This application utilizes the following libraries:
 
-![image](https://github.com/jeancs21/appointment-app/assets/40588173/933e2763-7171-4a99-a1cb-940c72579e53)
+![libraries](https://github.com/jeancs21/appointment-app/assets/40588173/b367385d-751e-4bec-a66f-8a5c4270bcc7)
+
 
 

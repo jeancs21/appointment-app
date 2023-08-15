@@ -47,11 +47,11 @@ This will start the development server. Open your browser and navigate to `http:
 
 ## Screenshots
 
-### Listado de pacientes
+### Patient List
 ![Listado](https://github.com/jeancs21/appointment-app/assets/40588173/6a0cffdc-f346-49b7-9709-fc598e08c47f)
 
 
-### Listado de citas
+### Appointment List
 ![listado-citas](https://github.com/jeancs21/appointment-app/assets/40588173/ee3ae6e7-7288-4d10-8e2a-17ee71241785)
 
 

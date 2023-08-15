@@ -66,18 +66,18 @@ const PatientTable:FunctionComponent<Props> = (props) => {
       <table className='w-full border-4 border-pink-100 text-left'>
         <thead className='bg-pink-400'>
           <tr className='text-white'>
-            <th className='border-2 py-4 px-4'>ID</th>
-            <th className='border-2 px-4'>Nombres</th>
+            <th className='border-2 px-4 py-4'>Nombres</th>
             <th className='border-2 px-4'>Apellidos</th>
+            <th className='border-2 px-4'>Correo electrónico</th>
             <th className='border-2 px-4'>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {props.patients.map((patient) => (
             <tr key={patient.id} className='border-2 cursor-pointer hover:bg-slate-100 hover:font-medium'>
-              <td className=' py-4 px-4 border-2'>{patient.id}</td>
-              <td className='border-2 px-4'>{patient.firstName}</td>
+              <td className='border-2 px-4 py-4'>{patient.firstName}</td>
               <td className='border-2 px-4'>{patient.lastName}</td>
+              <td className='px-4 border-2'>{patient.email}</td>
               <td className='border-2 px-4'>
                 <div className='flex gap-8'>
                   <EyeIcon

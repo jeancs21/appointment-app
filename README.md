@@ -102,6 +102,7 @@ This will start the development server. Open your browser and navigate to `http:
 - Validate patient identification.
 - Fix validation form.
 - Improve menu UI
+- Not Found Page needs styling.
 
 ## Libraries
 

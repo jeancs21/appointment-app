@@ -47,7 +47,12 @@ This will start the development server. Open your browser and navigate to `http:
 
 ## Screenshots
 
-Screenshots of the application can be found [here](link-to-your-screenshots).
+### Listado de pacientes
+![Listado](https://github.com/jeancs21/appointment-app/assets/40588173/476921bc-13bb-4a23-a419-23492ecc17ae)
+
+### Listado de citas
+![listado-citas](https://github.com/jeancs21/appointment-app/assets/40588173/5cef3054-445f-4743-8853-8a728bdf34b0)
+
 
 ## Features
 
@@ -91,6 +96,11 @@ Screenshots of the application can be found [here](link-to-your-screenshots).
 
 - Filter appointments by their status, such as active or canceled.
 
+### Others
+- Validate patient identification.
+- Fix validation form.
+- Improve menu UI
+
 ## Libraries
 
 This application utilizes the following libraries:
@@ -98,6 +108,3 @@ This application utilizes the following libraries:
 ![image](https://github.com/jeancs21/appointment-app/assets/40588173/933e2763-7171-4a99-a1cb-940c72579e53)
 
 
-Feel free to explore the source code and contribute to the development of this application. If you encounter any issues or have suggestions, please submit them to the [Issue Tracker](link-to-your-issue-tracker).
-
-Happy coding!

@@ -1,11 +1,12 @@
-import EmptyStateMessage from "../../../containers/EmptyStateMessage"
+import EmptyStateMessage from "../../../containers/Messages/EmptyStateMessage"
+import { PublicRoutes } from "../../../model/routes"
 
 const EmptyPatientListMessage = () => {
   return (
     <>
         <EmptyStateMessage
             message="Actualmente no se encuentran pacientes registrados"
-            routePath="/add-patient"
+            routePath={PublicRoutes.ADD_PATIENT}
             buttonTitle="Registrar paciente"
         />
     </>
